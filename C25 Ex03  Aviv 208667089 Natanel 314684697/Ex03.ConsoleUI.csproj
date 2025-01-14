@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{B7535CFD-496B-46A0-91FE-5B2D85B64786}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>C25_Ex03__Aviv_208667089_Natanel_314684697</RootNamespace>
+    <RootNamespace>Ex03.ConsoleUI</RootNamespace>
     <AssemblyName>C25 Ex03  Aviv 208667089 Natanel 314684697</AssemblyName>
     <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -43,6 +43,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CodeFile1.cs" />
+    <Compile Include="Factory.cs" />
+    <Compile Include="GarageMenagement.cs" />
+    <Compile Include="MenuPrints.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

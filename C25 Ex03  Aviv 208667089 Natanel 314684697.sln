@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35527.113 d17.12
+VisualStudioVersion = 17.12.35527.113
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ex03.ConsoleUI", "C25 Ex03  Aviv 208667089 Natanel 314684697\Ex03.ConsoleUI.csproj", "{B7535CFD-496B-46A0-91FE-5B2D85B64786}"
 EndProject

@@ -1,49 +1,129 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
     public abstract class Vehicle
     {
         private string m_Model;
-        private string m_LicensePlate;
-        private float m_EnergyPercentage; // כאן מוגדר המשתנה שחסר
+        public string m_LicensePlate;
+        private float m_EnergyPrecents;
+        private List<Wheel> m_Wheels;
+        private string m_PhoneNumber;
+        private string m_Name;
+        public eGarageVehicleStatus m_Status;
 
+        private static List<string> s_LicensePlates = new List<string>(); // Static list for license plates
+        public static List<Vehicle> vehicles = new List<Vehicle>(); // Static list for vehicles 
+
+        public Vehicle()
+        {
+            m_Status = eGarageVehicleStatus.InRepair;
+        }
+        public string OwnerName
+        {
+            get { return m_Name; }
+            set { m_Name = value; }
+        }
+        public string LicensePlate
+        {
+            get { return m_LicensePlate; }
+            set
+            {
+                if (s_LicensePlates.Contains(value))
+                {
+                    throw new ArgumentException("License plate already exists in the system.");
+                }
+                if (CheckNumberOfLicense(value))
+                {
+                    m_LicensePlate = value;
+                    s_LicensePlates.Add(value); // Add to the list
+                }
+                else
+                {
+                    throw new ArgumentException("Invalid license plate format.");
+                }
+            }
+        }
+        public string GetPhoneNumber
+        {
+            get { return m_PhoneNumber; }
+            set { m_PhoneNumber = value; }
+        }
+        public string EngineType { 
+            get { return EngineType; }
+            set { EngineType = value; } 
+        }
+        public float EnergyPrecents
+        {
+            get { return m_EnergyPrecents; }
+            set { m_EnergyPrecents = value; }
+        }
         public string Model
         {
             get { return m_Model; }
             set { m_Model = value; }
         }
-
-        public string LicensePlate
+        public List<Wheel> Wheels
         {
-            get { return m_LicensePlate; }
-            set { m_LicensePlate = value; }
-        }
-
-        public float EnergyPercentage
-        {
-            get { return m_EnergyPercentage; }
+            get
+            {
+                return m_Wheels;
+            }
             set
             {
-                if (value < 0 || value > 100)
-                {
-                    throw new ArgumentException("Energy percentage must be between 0 and 100.");
-                }
-                m_EnergyPercentage = value;
+                m_Wheels = value;
             }
         }
-
-        public Vehicle(string model, string licensePlate, float energyPercentage)
+        public abstract void SetAirPressure(float i_AirPressure);
+        public abstract void PutPressure(float i_Pressure);
+        public abstract float GetAirPressure();
+        private bool CheckNumberOfLicense(string m_licensePlate)
         {
-            m_Model = model;
-            m_LicensePlate = licensePlate;
-            EnergyPercentage = energyPercentage;
+            bool isNumberOfLicense = true;
+            if (m_licensePlate.Length != 7)
+            {
+                isNumberOfLicense = false;
+            }
+            int checkNum;
+            if (!(int.TryParse(m_licensePlate, out checkNum)))
+            {
+                isNumberOfLicense = false;
+            }
+            return isNumberOfLicense;
+        }
+        public static bool IsLicensePlateExists(string licensePlate)
+        {
+            return s_LicensePlates.Contains(licensePlate);
+        }
+        public static List<string> GetExistingLicensePlates(string platesToCheck)
+        {
+            List<string> existingPlates = new List<string>();
+
+            foreach (var plate in existingPlates)
+            {
+                if (s_LicensePlates.Contains(plate))
+                {
+                    existingPlates.Add(plate);
+                }
+            }
+
+            return existingPlates;
+
+        }
+        public override string ToString()
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.AppendLine($"Model name: {m_Model}");
+            stringBuilder.AppendLine($"License number: {m_LicensePlate}");
+            stringBuilder.AppendLine("Wheels:");
+            for (int i = 0; i < Wheels.Count; i++)
+            {
+                stringBuilder.AppendLine($"    {Wheels[i].ToString()}");
+            }
+
+            return stringBuilder.ToString();
         }
     }
 }
-
